@@ -367,24 +367,22 @@ export default makeScene2D(function* (view) {
 
   // Создаем стрелки после всех других элементов, чтобы они были сверху
   // Создаем по 4 стрелки для каждого из 3 ДЦ, всего 12 стрелок
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 4; j++) {
-        const arrow = createRef<Line>();
-        view.add(
-            <Line
-                ref={arrow}
-                points={[]}
-                stroke={SUCCESS_COLOR} // Все стрелки зеленые
-                lineWidth={10}
-                endArrow
-                arrowSize={12}
-                opacity={1}
-                end={0}
-                zIndex={100} // Убедимся, что стрелки сверху
-            />
-        );
-        arrowRefs.push(arrow);
-    }
+  for (let i = 0; i < 4; i++) {
+    const arrow = createRef<Line>();
+    view.add(
+        <Line
+            ref={arrow}
+            points={[]}
+            stroke={SUCCESS_COLOR} // Все стрелки зеленые
+            lineWidth={10}
+            endArrow
+            arrowSize={12}
+            opacity={1}
+            end={0}
+            zIndex={100} // Убедимся, что стрелки сверху
+        />
+    );
+    arrowRefs.push(arrow);
   }
 
 // Initialize connections after a short delay to ensure components are rendered
@@ -460,10 +458,10 @@ yield* all(
     animateArrowWithDiskAndHide(arrowRefs[0], new Vector2(dsProxyPos), diskPositions[0][0], diskRefs[0][0]),
     
     // ДЦ 2, диск A (верхний)
-    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][0], diskRefs[1][0]),
+    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
     
     // ДЦ 3, диск A (верхний)
-    animateArrowWithDiskAndHide(arrowRefs[4], new Vector2(dsProxyPos), diskPositions[2][0], diskRefs[2][0]),
+    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[2][2], diskRefs[2][2]),
   );
 
   // Сброс состояния сценария
@@ -515,9 +513,9 @@ yield* all(
   // В первом ДЦ стрелка красная, так как попадает на отказавший стеллаж
   yield* all(
     // Зеленые стрелки в другие ДЦ с последующей подсветкой дисков
-    animateArrowWithDiskAndHide(arrowRefs[5], new Vector2(dsProxyPos), diskPositions[0][1], diskRefs[0][1]),
-    animateArrowWithDiskAndHide(arrowRefs[6], new Vector2(dsProxyPos), diskPositions[1][0], diskRefs[1][0]),
-    animateArrowWithDiskAndHide(arrowRefs[7], new Vector2(dsProxyPos), diskPositions[2][0], diskRefs[2][0]),
+    animateArrowWithDiskAndHide(arrowRefs[0], new Vector2(dsProxyPos), diskPositions[0][1], diskRefs[0][1]),
+    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[1][2], diskRefs[1][2]),
+    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[2][1], diskRefs[2][1]),
     diskRefs[0][1]().lineWidth(10, 0.5),
     diskRefs[1][0]().lineWidth(10, 0.5),
     diskRefs[2][0]().lineWidth(10, 0.5),
@@ -531,9 +529,6 @@ yield* all(
     explanationText().opacity(0, 0.5),
     connectionRefs[0]().stroke(DISK_COLOR, 0.5),
     diskRefs[0][0]().fill(DISK_COLOR, 0.5),
-    arrowRefs[5]().end(0, 0),
-    arrowRefs[6]().end(0, 0),
-    arrowRefs[7]().end(0, 0),
     rack1Cross().end(0, 0),
     rack1Cross2().end(0, 0),
   );
@@ -582,14 +577,13 @@ yield* all(
     explanationText().opacity(1, 0.3)
   );
 
-  // Первоначальная попытка записи - по 1 диску в каждом ДЦ
   yield* all(
     explanationText().text('Дополнительно пишутся\nеще 2 копии по 1 в соседние стойки\nв доступных ДЦ', 0.3),
     explanationText().opacity(1, 0.3),
     animateArrowWithDiskAndHide(arrowRefs[0], new Vector2(dsProxyPos), diskPositions[0][0], diskRefs[0][0]),
-    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[0][1], diskRefs[0][1]),
-    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][0], diskRefs[1][0]),
-    animateArrowWithDiskAndHide(arrowRefs[3], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
+    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[0][2], diskRefs[0][2]),
+    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
+    animateArrowWithDiskAndHide(arrowRefs[3], new Vector2(dsProxyPos), diskPositions[1][2], diskRefs[1][2]),
   );
 
   yield* all(
@@ -646,8 +640,8 @@ yield* all(
     explanationText().opacity(1, 0.3),
     animateArrowWithDiskAndHide(arrowRefs[0], new Vector2(dsProxyPos), diskPositions[0][1], diskRefs[0][1]),
     animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[0][2], diskRefs[0][2]),
-    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][0], diskRefs[1][0]),
-    animateArrowWithDiskAndHide(arrowRefs[3], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
+    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
+    animateArrowWithDiskAndHide(arrowRefs[3], new Vector2(dsProxyPos), diskPositions[1][2], diskRefs[1][2]),
   );
 
   yield* all(
