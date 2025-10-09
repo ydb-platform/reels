@@ -42,7 +42,7 @@ npm start
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Add new scene into separated directory in the root of project
+3. Add new scene into separated directory in the root of project using `template`
 4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 5. Push to the branch (`git push origin feature/AmazingFeature`)
 6. Open a pull request
