@@ -20,8 +20,8 @@ const DISK_ACTIVE_COLOR = '#9BB5D1';
 /** Primary text color used in the scene */
 const TEXT_COLOR = '#0053f9ff';
 /** Color indicating successful operations or states */
-const SUCCESS_COLOR = '#59ff00ff';
-const SUCCESS_DISK_COLOR = '#62ff00ff';
+const SUCCESS_COLOR = '#00fa92ff';
+const SUCCESS_DISK_COLOR = '#00ff6aff';
 const ERROR_COLOR = '#ff1100ff';
 const PRIMARY_COLOR = '#0317f4ff';
 const FAILURE_DC_COLOR = '#ff000080';
@@ -92,23 +92,13 @@ export default makeScene2D(function* (view) {
     </Node>
   );
 
-      // Show the YDB icon
-  yield* ydbIconRef().opacity(1, 0.5);
-  
-  // Wait for 3 seconds
-  yield* waitFor(1);
-  
-  // Hide the YDB icon
-  yield* ydbIconRef().opacity(0, 0.5);
-
-
   // Add the initial title to the view
   view.add(
     <Txt
       ref={initialTitle}
       text="Надежная запись YDB в режиме трех датацентров"
       fontSize={80}
-      fill={PRIMARY_COLOR}
+      fill={DISK_COLOR}
       fontWeight={700}
       textAlign="center"
       x={0}
@@ -581,8 +571,8 @@ yield* all(
     explanationText().text('Дополнительно пишутся\nеще 2 копии по 1 в соседние стойки\nв доступных ДЦ', 0.3),
     explanationText().opacity(1, 0.3),
     animateArrowWithDiskAndHide(arrowRefs[0], new Vector2(dsProxyPos), diskPositions[0][0], diskRefs[0][0]),
-    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[0][2], diskRefs[0][2]),
-    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][1], diskRefs[1][1]),
+    animateArrowWithDiskAndHide(arrowRefs[1], new Vector2(dsProxyPos), diskPositions[0][1], diskRefs[0][1]),
+    animateArrowWithDiskAndHide(arrowRefs[2], new Vector2(dsProxyPos), diskPositions[1][0], diskRefs[1][0]),
     animateArrowWithDiskAndHide(arrowRefs[3], new Vector2(dsProxyPos), diskPositions[1][2], diskRefs[1][2]),
   );
 
@@ -671,22 +661,35 @@ yield* all(
     dsProxy().opacity(0, 2.5),
     ydbIconRef().opacity(1, 2.5),
     initialTitle().opacity(0, 0),
-    initialTitle().text('Scale it easy', 0),
+    initialTitle().text('', 0),
   )
 
   // Wait for 3 seconds
   yield* waitFor(1);
   
   yield* all(
-    ydbIconRef().opacity(0, 0.5),
-    initialTitle().text('Scale it easy', 0.5),
+    ydbIconRef().y(-300, 0.5),
+    initialTitle().y(200, 0.5),
+    initialTitle().fontSize(130, 0.5),
+    initialTitle().text('YDB', 0.5),
     initialTitle().opacity(1, 0.5),
   );
   
-  // Wait for 3 seconds
   yield* waitFor(1);
-  
-  // Hide the initial title
-  yield* initialTitle().opacity(0, 0.5);
 
+  // Hide the initial title
+  yield* all(
+    initialTitle().opacity(0, 0.5),
+    initialTitle().text('', 0.5),
+    initialTitle().fontSize(70, 0.5),
+  );
+
+  yield* all(
+    waitFor(0.5),
+    initialTitle().text('Scale it easy', 0)
+  );
+
+  yield* initialTitle().opacity(1, 0.5);
+
+  yield* waitFor(3);
 });
