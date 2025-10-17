@@ -1,8 +1,11 @@
 {
-    "name": "ydb-reels",
-    "private": true,
-    "workspaces": [
-        "3dc-data-recording",
-        "template"
-    ]
+  "name": "ydb-reels",
+  "private": true,
+  "workspaces": [
+    "3dc-data-recording",
+    "template",
+    "vector-index-explained",
+    "tablets-explained",
+    "interconnect-explained"
+  ]
 }
