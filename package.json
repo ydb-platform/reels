@@ -3,9 +3,6 @@
   "private": true,
   "workspaces": [
     "3dc-data-recording",
-    "template",
-    "vector-index-explained",
-    "tablets-explained",
-    "interconnect-explained"
+    "template"
   ]
 }
