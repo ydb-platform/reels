@@ -52,6 +52,14 @@ npm run build -w template
 5. Push to the branch (`git push origin feature/AmazingFeature`)
 6. Open a pull request
 
+## AI-assisted reel creation
+
+To create a reel with an AI agent:
+
+1. Open `PROMPTS/REEL_AGENT_PREPROMPT.md` and copy its contents as the preprompt.
+2. Ask the AI agent to create a new reel using this preprompt, following the docs-driven workflow and brand intro/outro rules.
+3. Use the `template` workspace as the base and follow the preprompt’s instructions for imports, icons, diagrams, and verification.
+
 ## Acknowledgments
 
 - [Motion Canvas](https://motion-canvas.github.io/) - Animation framework used for creating the visualizations
