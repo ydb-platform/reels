@@ -10,40 +10,45 @@ This repository contains animated explanations of YDB internals created with Mot
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn
+- Node.js 18+ (recommended)
+- npm 7+ (required for npm workspaces)
 
-## Available Scenes
+## Available Scenes (Workspaces)
 
-Currently available scenes:
-- `3dc-data-recording` - Demonstrates 3D data recording concepts in YDB
+Currently available workspaces:
+- `3dc-data-recording` — Demonstrates 3D data recording concepts in YDB
+- `template` — Motion Canvas starter for creating a new reel
 
 *More scenes will be added over time, covering various aspects of YDB internals.*
 
-### Installation and run
+### Installation and run (npm workspaces)
 
-1. Navigate to the scene directory:
-   ```bash
-   cd 3dc-data-recording
-   ```
-   `3dc-data-recording` - example
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Running the Project
+Install dependencies at the repo root (single lockfile for all workspaces):
 ```bash
-npm start
+npm install
+```
+
+Start a workspace dev server:
+```bash
+npm run start -w 3dc-data-recording
+# or
+npm run start -w template
+```
+
+Build a workspace:
+```bash
+npm run build -w 3dc-data-recording
+# or
+npm run build -w template
 ```
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Add new scene into separated directory in the root of project using `template`
-4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+3. Add a new reel as a new folder in the repo root using the `template` workspace as a starter
+4. Add the new folder name to the root `package.json` `workspaces` array
+5. Commit your changes (`feat(reel): add <new-reel-name>`) following Conventional Commits
 5. Push to the branch (`git push origin feature/AmazingFeature`)
 6. Open a pull request
 

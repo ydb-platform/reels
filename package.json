@@ -1,0 +1,8 @@
+{
+    "name": "ydb-reels",
+    "private": true,
+    "workspaces": [
+        "3dc-data-recording",
+        "template"
+    ]
+}
